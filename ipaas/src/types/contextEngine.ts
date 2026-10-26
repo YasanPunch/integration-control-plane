@@ -369,6 +369,8 @@ export interface UploadEntry extends UploadedFile {
   detail?: string;
   /** The engine refused the caller; the owner grant would fix it. */
   forbidden?: boolean;
+  /** The last status read did not reach the engine: `status` is the last one read and another read is scheduled. */
+  check?: 'retrying';
 }
 
 export interface IngestFileInput {

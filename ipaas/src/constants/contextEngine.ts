@@ -720,6 +720,16 @@ export const UPLOAD_CONCURRENCY = 3;
 /** How often an uploaded file's job and record are checked while it is still moving. */
 export const UPLOAD_POLL_MS = 3000;
 
+/** Status reads in flight at once from one browser, so a restored list of files does not flood the engine. */
+export const UPLOAD_CHECK_CONCURRENCY = 4;
+
+/** Waits before reading a file's status again after the engine could not be reached, then every UPLOAD_CHECK_STEADY_MS. */
+export const UPLOAD_CHECK_BACKOFF_MS = [3000, 6000, 12000] as const;
+export const UPLOAD_CHECK_STEADY_MS = 30000;
+
+/** Shown under a file whose status check did not reach the engine; its last status stays. */
+export const UPLOAD_CHECK_RETRY_DETAIL = "Couldn't reach the engine to check this file. Trying again.";
+
 export const UPLOAD_STATUS_LABEL: Record<UploadFileStatus, string> = {
   uploading: 'Uploading',
   queued: 'Queued',
